@@ -1,6 +1,8 @@
 package jm.security.example.controller;
 
+import jm.security.example.dao.RoleDao;
 import jm.security.example.hibernate.HibernateConfig;
+import jm.security.example.model.Role;
 import jm.security.example.model.User;
 import jm.security.example.service.UserService;
 import org.springframework.context.ApplicationContext;
@@ -9,6 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -16,6 +24,7 @@ public class AdminController {
     private ApplicationContext context =
             new AnnotationConfigApplicationContext(HibernateConfig.class);
     private UserService userService = context.getBean(UserService.class);
+    private RoleDao roleDao = context.getBean(RoleDao.class);
 
     @GetMapping
     public String getAdmin() {
@@ -31,6 +40,9 @@ public class AdminController {
     @GetMapping(value = "/users/new")
     public String newUser(Model model) {
         model.addAttribute("user", new User());
+        List<Role> roleList = roleDao.listRoles();
+        model.addAttribute("roleList", roleList.stream().collect(Collectors.toSet()));
+//        model.addAttribute("roleList", roleList);
         return "admin/new";
     }
 

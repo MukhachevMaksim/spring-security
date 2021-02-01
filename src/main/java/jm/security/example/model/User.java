@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 // Для того, чтобы в дальнейшим использовать класс User в Spring Security, он должен реализовывать интерфейс UserDetails.
@@ -102,4 +103,19 @@ public class User implements UserDetails {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+    public void setRoles(Role role) {
+        this.roles = new HashSet<Role>();
+        roles.add(role);
+    }
+
+//    public void setRoles(Set<String> strRoles) {
+//        Set<Role> newRoles = new HashSet<Role>();
+//        for (String r : strRoles) {
+//            Role role = new Role();
+//            role.setRole(r);
+//            newRoles.add(role);
+//        }
+//        this.roles = newRoles;
+//    }
 }

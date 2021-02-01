@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Repository
 public class RoleDaoImpl implements RoleDao {
@@ -15,5 +16,10 @@ public class RoleDaoImpl implements RoleDao {
     @Override
     public Role getRoleById(Long id) {
         return entityManager.find(Role.class, id);
+    }
+
+    @Override
+    public List<Role> listRoles() {
+        return entityManager.createQuery("select r from Role r", Role.class).getResultList();
     }
 }

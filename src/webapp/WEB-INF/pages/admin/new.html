@@ -9,6 +9,12 @@
 <form th:method="POST" th:action="@{/admin/users}" th:object="${user}">
     <label><p>Enter name:  <input type="text" th:field="*{name}"></p></label>
     <label><p>Enter password: <input type="text" th:field="*{password}"></p></label>
+    <label>
+        <select multiple size="2" th:field="*{roles}">
+            <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.getRole()}">
+            </option>
+        </select>
+    </label>
     <input type="submit" value="Create"/>
 </form>
 

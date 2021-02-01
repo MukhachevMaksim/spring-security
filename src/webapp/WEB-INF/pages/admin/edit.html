@@ -9,6 +9,14 @@
 <form th:method="PATCH" th:action="@{/admin/users/{id}(id=${user.getId()})}" th:object="${user}">
     <label><p>Enter name:  <input type="text" th:field="*{name}"></p></label>
     <label><p>Enter password: <input type="text" th:field="*{password}"></p></label>
+<!--    <ul>-->
+<!--        <li th:each="role : ${user.getRoles()}">-->
+<!--            <label>-->
+<!--                <input type="checkbox" th:field="*{roles}" th:value="${role}"-->
+<!--                       th:text="${role.getRole()}" />-->
+<!--            </label>-->
+<!--        </li>-->
+<!--    </ul>-->
     <input type="submit" value="Update"/>
 </form>
 

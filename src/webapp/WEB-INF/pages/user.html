@@ -1,13 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Hello user</title>
 </head>
 <body>
+
 <div>
-    <p>Hello User, this Spring Security example</p>
-    <a href="/logout">Link to logout page</a>
+    <h2>Hi user! This is information about you.</h2>
 </div>
+
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Roles</th>
+    </tr>
+
+    <tr>
+        <td th:text="${name}">Name</td>
+        <td>
+            <th:block th:each="role : ${roles}">
+                <th:block th:text="${role} + ';' "> </th:block>
+            </th:block>
+        </td>
+    </tr>
+</table>
+
+<br/>
+<hr/>
+<a href="/logout">Link to logout page</a>
+
 </body>
 </html>
